@@ -14,6 +14,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* <Route path="/" element={<Login onLogin={setUser} />} /> */}
         <Route path="/" element={<Login onLogin={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/welcome" element={user ? <WelcomePage /> : <Login />} />

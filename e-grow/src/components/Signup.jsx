@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { auth, googleProvider, githubProvider } from "./Firebase";
+import { auth, db } from "./Firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore"; 
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -26,7 +27,7 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const { email, password, confirmPassword, phone } = formData;
+    const { name, username, dob, phone, email, password, confirmPassword } = formData;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -41,12 +42,25 @@ const Signup = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
       await sendEmailVerification(auth.currentUser);
+
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        username,
+        dob,
+        phone,
+        email,
+        createdAt: new Date().toISOString(),
+      });
+
       alert("Account created successfully! Please verify your email.");
-      navigate("/welcome"); // Redirect to Welcome page after signup
+      navigate("/welcome"); 
     } catch (error) {
-      console.error(error.message);
+      console.error("Error during signup:", error.message);
       setError("Failed to create account. Please try again.");
     }
   };
@@ -56,12 +70,16 @@ const Signup = () => {
     const phoneNumber = formData.phone;
 
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-        size: 'invisible',
-        callback: (response) => {
-          // recaptcha solved
-        }
-      }, auth);
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response) => {
+            // recaptcha solved
+          },
+        },
+        auth
+      );
     }
 
     const appVerifier = window.recaptchaVerifier;
@@ -71,7 +89,7 @@ const Signup = () => {
         alert("Verification code sent!");
       })
       .catch((error) => {
-        console.error(error.message);
+        console.error("Error sending verification code:", error.message);
         setError("Failed to send verification code.");
       });
   };
@@ -79,14 +97,15 @@ const Signup = () => {
   const handlePhoneVerificationCode = (e) => {
     e.preventDefault();
     const code = phoneVerificationCode;
-    
-    window.confirmationResult.confirm(code)
+
+    window.confirmationResult
+      .confirm(code)
       .then((result) => {
         setIsPhoneVerified(true);
         alert("Phone number verified successfully!");
       })
       .catch((error) => {
-        console.error(error.message);
+        console.error("Error verifying phone number:", error.message);
         setError("Invalid verification code.");
       });
   };
@@ -123,7 +142,7 @@ const Signup = () => {
           </div>
           <div className="mb-4">
             <input
-              type="date"
+                            type="date"
               id="dob"
               name="dob"
               value={formData.dob}
@@ -199,38 +218,7 @@ const Signup = () => {
             Sign Up
           </button>
         </form>
-
         <div id="recaptcha-container" className="mt-4"></div>
-
-        <div className="mt-4">
-          <button
-            onClick={handlePhoneNumberVerification}
-            className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 transition duration-200 focus:outline-none"
-          >
-            Verify Phone Number
-          </button>
-        </div>
-
-        {isPhoneVerified && (
-          <div className="mt-4">
-            <form onSubmit={handlePhoneVerificationCode}>
-              <input
-                type="text"
-                placeholder="Enter Verification Code"
-                value={phoneVerificationCode}
-                onChange={(e) => setPhoneVerificationCode(e.target.value)}
-                className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-500 transition duration-200 focus:outline-none"
-              >
-                Verify Code
-              </button>
-            </form>
-          </div>
-        )}
       </div>
     </div>
   );
