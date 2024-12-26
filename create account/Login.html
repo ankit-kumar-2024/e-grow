@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>e-grow | Login</title>
+</head>
+
+<body
+    class="min-h-screen flex flex-col items-center py-4 justify-center bg-gradient-to-r from-white via-gray-600 to-black">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6">
+        <h1 class="text-2xl font-bold text-center mb-3 text-black">Login</h1>
+        <div id="error-message" class="text-red-500 mb-3 text-center hidden"></div>
+        <form id="login-form">
+            <!-- Username -->
+            <div class="mb-3">
+                <input type="text" id="username" name="username" placeholder="Username"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <input type="password" id="password" name="password" placeholder="Password"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Show Password Button -->
+            <button type="button" id="toggle-password" class="text-blue-600 my-2">Show Password</button>
+            <!-- Submit Button -->
+            <button type="button" id="login"
+                class="w-full p-2 bg-black text-white font-bold rounded-lg hover:bg-gray-700 transition duration-200 focus:outline-none">
+                Login
+            </button>
+        </form>
+
+        <!-- OR Divider -->
+        <div class="my-4 flex items-center">
+            <hr class="flex-grow border-gray-300" />
+            <span class="px-3 text-gray-500">OR</span>
+            <hr class="flex-grow border-gray-300" />
+        </div>
+
+        <!-- Google Login Button -->
+        <button id="google-login"
+            class="w-full p-2 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600 transition duration-200 focus:outline-none flex items-center justify-center mb-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google Logo"
+                class="w-6 h-6 mr-2" />
+            Login with Google
+        </button>
+
+        <!-- GitHub Login Button -->
+        <button id="github-login"
+            class="w-full p-2 bg-gray-800 text-white font-bold rounded-lg hover:bg-gray-900 transition duration-200 focus:outline-none flex items-center justify-center">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo"
+                class="w-6 h-6 mr-2" />
+            Login with GitHub
+        </button>
+        <div class="mt-4 text-center">
+            <span class="text-gray-700">Don't have an account? </span>
+            <a href="Register.html" class="text-blue-600 hover:underline">Sign up here</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAkpJ9y-HQoipU9-VNOYOSLHD8gC1OPiIE",
+            authDomain: "e-grow-126289.firebaseapp.com",
+            projectId: "e-grow-126289",
+            storageBucket: "e-grow-126289.firebasestorage.app",
+            messagingSenderId: "486319206871",
+            appId: "1:486319206871:web:fc20167f83023fc5c5db92"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+        const githubProvider = new GithubAuthProvider();
+
+        // Toggle Password Visibility
+        const togglePasswordButton = document.getElementById("toggle-password");
+        togglePasswordButton.addEventListener("click", () => {
+            const passwordField = document.getElementById("password");
+
+            const fieldType = passwordField.type === "password" ? "text" : "password";
+            passwordField.type = fieldType;
+
+            togglePasswordButton.textContent = fieldType === "password" ? "Show Password" : "Hide Password";
+        });
+
+        // Login Form Submission
+        document.getElementById("login").addEventListener("click", async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!username || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            try {
+                const snapshot = await get(child(ref(db), `users/${username}`));
+
+                if (!snapshot.exists()) {
+                    alert("Username does not exist. Please sign up first.");
+                    return;
+                }
+
+                const userData = snapshot.val();
+
+                if (userData.password !== password) {
+                    alert("Incorrect password. Please try again.");
+                    return;
+                }
+
+                alert(`Welcome back, ${userData.name}! Login successful.`);
+                document.getElementById("login-form").reset();
+                // Redirect to a dashboard or home page here
+            } catch (error) {
+                console.error("Error during login:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+
+        // Google Login
+        document.getElementById("google-login").addEventListener("click", async () => {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                alert(`Welcome back, ${user.displayName}! Login successful.`);
+                // Redirect to a dashboard or home page here
+            } catch (error) {
+                console.error("Error during Google login:", error);
+                alert("Google login failed. Please try again.");
+            }
+        });
+
+        // GitHub Login
+        document.getElementById("github-login").addEventListener("click", async () => {
+            try {
+                const result = await signInWithPopup(auth, githubProvider);
+                const user = result.user;
+                alert(`Welcome back, ${user.displayName}! Login successful.`);
+                // Redirect to a dashboard or home page here
+            } catch (error) {
+                console.error("Error during GitHub login:", error);
+                alert("GitHub login failed. Please try again.");
+            }
+        });
+    </script>
+</body>
+
+</html>

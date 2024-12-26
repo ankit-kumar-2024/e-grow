@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>e-grow | Sign Up</title>
+</head>
+
+<body
+    class="min-h-screen flex flex-col items-center py-4 justify-center bg-gradient-to-r from-black via-gray-600 to-white">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6">
+        <h1 class="text-2xl font-bold text-center mb-3 text-black">Sign Up</h1>
+        <div id="error-message" class="text-red-500 mb-3 text-center hidden"></div>
+        <form id="signup-form">
+            <!-- Full Name -->
+            <div class="mb-3">
+                <input type="text" id="name" name="name" placeholder="Full Name"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Username -->
+            <div class="mb-3">
+                <input type="text" id="username" name="username" placeholder="Username"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Date of Birth -->
+            <div class="mb-3">
+                <input type="date" id="dob" name="dob"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Gender -->
+            <div class="mb-3">
+                <select id="gender" name="gender"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black">
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <input type="email" id="email" name="email" placeholder="Email"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <input type="password" id="password" name="password" placeholder="Password"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+                <div class="my-2 text-sm text-gray-600">
+                    Password must contain at least one letter, one number, and one special character (!@#$%^&*).
+                </div>
+            </div>
+            <!-- Show Password Button -->
+            <button type="button" id="toggle-password" class="text-blue-600 my-2">Show Password</button>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
+                    class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
+                    required />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" id="submit"
+                class="w-full p-2 bg-black text-white font-bold rounded-lg hover:bg-gray-700 transition duration-200 focus:outline-none">
+                Sign Up
+            </button>
+            <div class="mt-4 text-center">
+                <span class="text-gray-700">Already have an account? </span>
+                <a href="Login.html" class="text-blue-600 hover:underline">Login here</a>
+            </div>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAkpJ9y-HQoipU9-VNOYOSLHD8gC1OPiIE",
+            authDomain: "e-grow-126289.firebaseapp.com",
+            projectId: "e-grow-126289",
+            storageBucket: "e-grow-126289.firebasestorage.app",
+            messagingSenderId: "486319206871",
+            appId: "1:486319206871:web:fc20167f83023fc5c5db92"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Toggle Password Visibility
+            const togglePasswordButton = document.getElementById("toggle-password");
+            togglePasswordButton.addEventListener("click", () => {
+                const passwordField = document.getElementById("password");
+                const confirmPasswordField = document.getElementById("confirmPassword");
+
+                const fieldType = passwordField.type === "password" ? "text" : "password";
+                passwordField.type = fieldType;
+                confirmPasswordField.type = fieldType;
+
+                togglePasswordButton.textContent = fieldType === "password" ? "Show Password" : "Hide Password";
+            });
+
+
+        // Submit Form
+        document.getElementById("submit").addEventListener("click", async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const dob = document.getElementById("dob").value.trim();
+            const gender = document.getElementById("gender").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+            if (!name || !username || !dob || !gender || !phone || !email || !password || !confirmPassword) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&*]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert("Password must contain at least one letter, one number, and one special character.");
+                return;
+            }
+
+            try {
+                const userRef = ref(db, 'users/' + username);
+                const snapshot = await get(child(ref(db), `users/${username}`));
+
+                if (snapshot.exists()) {
+                    alert("Username already exists. Please choose another.");
+                    return;
+                }
+
+                await set(userRef, { name, username, dob, gender, phone, email, password });
+                alert("Signup successful!");
+                document.getElementById("signup-form").reset();
+            } catch (error) {
+                console.error("Error saving data:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    </script>
+</body>
+
+</html>
