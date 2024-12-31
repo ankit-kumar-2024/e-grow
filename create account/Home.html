@@ -12,29 +12,64 @@
     ::-webkit-scrollbar {
     display: none;
 }
+.bg-theme{
+    background-color: rgb(16, 173, 115);
+}
+.text-theme{
+    color: black;
+}
+.text-theme2{
+    color: white;
+}
 </style>
 
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-theme">
     <!-- Dropdown Menu -->
-    <div id="menu" class="hidden fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50">
-        <div class="p-5 border-b">
-            <h2 class="text-xl font-bold">e-grow</h2>
+    <div id="menu" class="hidden fixed top-0 left-0 w-64 h-full bg-theme z-50">
+        <div class="p-5 border-b-4 border-blue-300">
+            <h2 class="text-xl font-bold text-gray-100 text-center">e-grow</h2>
         </div>
-        <ul class="p-5 space-y-4">
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600">Dashboard</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600">Profile</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600">Settings</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600"><box-icon name='log-out-circle'></box-icon>Logout</a></li>
-        </ul>
+        <div class="p-2 space-y-4">
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme transition duration-300">Profile</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Accounts</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Settins</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Saved</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme transition duration-300">Sign Out</span>
+            </div>
+        </div>
     </div>
     <!-- Header Section -->
-    <div class="flex items-center justify-between px-5 py-3 bg-gray-100 border-b border-gray-300">
+    <div class="flex items-center justify-between px-5 py-3 bg-theme border-b-4 border-green-300">
         <!-- Menu Button -->
-        <div id="menu-button" class="text-lg cursor-pointer">☰</div>
+        <div id="menu-button" class="text-lg text-gray-100 cursor-pointer">☰</div>
     
         <div class="flex flex-grow mx-6">
             <input type="text" placeholder="Search"
-                class="flex-1 border border-gray-300 rounded-lg px-4 py-2 mx-7 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                class="flex-1 border border-gray-300 rounded-lg px-4 py-2 mx-7 focus:outline-none focus:ring-2 focus:ring-green-300">
         </div>
         <!-- Icon to trigger profile card display -->
         <div class="absolute top-4 right-2">
@@ -45,22 +80,24 @@
     </div>
 
     <!-- Profile Card -->
-    <div id="profileCard" class="w-full mb-20 bg-gray-100 overflow-y-auto">
+    <div id="profileCard" class="w-full mb-20 bg-theme overflow-y-auto">
         <div class="p-6 text-center">
             <!-- Profile Photo -->
-            <img class="w-24 h-24 rounded-full mx-auto mb-4" src="Logo/school_16481866.png" alt="User Profile Photo">
+            <img class="w-24 h-24 border-2 border-blue-300 bg-gray-100 rounded-full mx-auto mb-4" src="Logo/school_16481866.png" alt="User Profile Photo">
     
             <!-- User Details -->
-            <h2 class="text-xl font-bold">Ankit Kumar</h2>
-            <p class="text-gray-600">@ancet-coder-26-289</p>
-            <p class="text-gray-600">ancet20016@gmail.com</p>
+            <h2 class="text-gray-100 text-xl font-bold">Ankit Kumar</h2>
+            <p class="text-theme2">@ancet-coder-26-289</p>
+            <p class="text-theme2">ancet20016@gmail.com</p>
     
             <!-- Logout Button -->
             <div class="max-w-60 mx-auto my-4 rounded overflow-hidden flex">
-                <button class="m-4 w-24 h-10 px-1 py-2 bg-gray-800 text-white text-sm rounded hover:bg-gray-900">Log
+                <button class="m-4 w-24 h-10 px-1 py-2 bg-gray-300 text-theme text-sm rounded hover:bg-gray-100">Log
                     Out</button>
-                <button class="m-4 w-24 h-10 px-1 py-2 bg-gray-800 text-white text-sm rounded hover:bg-gray-900">Edit
-                    Profile</button>
+                <!-- <button class="m-4 w-24 h-10 px-1 py-2 bg-theme text-white text-sm rounded hover:bg-gray-900">Edit
+                    Profile</button> -->
+                <a href="Edit.html"><button class="m-4 w-24 h-10 px-1 py-2 bg-gray-300 text-theme text-sm rounded hover:bg-gray-100">Edit
+                    Profile</button></a>
             </div>
         </div>
     
@@ -90,42 +127,46 @@
     </div>
     
     
-    <!-- Overlay -->
+    <!-- Overlay-nav -->
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
     <div id="home" class="home">
-        <div class="flex items-center justify-around mt-2 border-b border-gray-300">
-            <div class="py-2 text-blue-600 border-b-2 border-blue-600">
-                <box-icon name='book-alt' type='solid' animation='tada'></box-icon>
-                <span class="text-sm">Books</span>
+        <div class="flex items-center mt-4 justify-around">
+            
+            <div
+                class="w-[200px] mr-1 py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='book-alt' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">Books</span>
             </div>
-            <div class="py-2 text-gray-600 cursor-pointer hover:text-blue-600">
-                <box-icon name='file' type='solid' animation='tada'></box-icon>
-                <span class="text-sm">Questions Paper</span>
+            <div
+                class="w-[200px] py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='file' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">PYQ</span>
             </div>
-            <div class="py-2 text-gray-600 cursor-pointer hover:text-blue-600">
-                <box-icon name='timer' type='solid' animation='tada'></box-icon>
-                <span class="text-sm">Tests</span>
+            <div
+                class="w-[200px] ml-1 py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='timer' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">Tests</span>
             </div>
         </div>
     
     
         <!-- Main Content -->
-        <div class="container mx-auto px-5 py-5">
+        <div class="container mx-auto px-5 py-5 mb-10">
     
         <div class="flex gap-4 mb-5 overflow-x-auto scrollbar-hide">
-            <div class="px-4 py-2 text-white bg-black rounded-full cursor-pointer whitespace-nowrap">class1</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 2</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 3</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 4</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 5</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 6</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 7</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 8</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 9</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 10</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 11</div>
-            <div class="px-4 py-2 bg-gray-300 rounded-full text-gray-700 cursor-pointer whitespace-nowrap">class 12</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class1</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 2</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 3</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 4</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 5</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 6</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 7</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 8</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 9</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 10</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 11</div>
+            <div class="px-2 py-2 whitespace-nowrap bg-gray-400 rounded-xl text-gray-900 hover:bg-gray-100 cursor-pointer border-2 hover:border-green-300">class 12</div>
             
         </div>
             <div class="grid grid-cols-1 gap-8 mb-6">
@@ -199,19 +240,41 @@
     </div>
 
     <!-- Footer Section -->
-    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 md:hidden">
-        <div class="flex justify-around py-3">
-            <div class="flex flex-col items-center text-blue-600">
-                <box-icon name='home' type='solid'></box-icon>
-                <span class="text-sm">Home</span>
+    <div class="fixed bottom-0 w-full bg-theme border-t-4 border-green-300">
+        <div class="flex justify-around py-3 px-3">
+            <div
+                class="nav-button w-[120px] mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 focusw-[120px] focus:bg-gray-300 focus:text-black focus:w-24 group">
+                <box-icon name="home" type="solid" class="text-xl" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme hidden group-hover:inline group-hover:ml-3 transition duration-300">Home</span>
             </div>
-            <div class="flex flex-col items-center text-gray-600 hover:text-blue-600">
-                <box-icon name='search-alt-2'></box-icon>
-                <span class="text-sm">Search</span>
+    
+            <div
+                class="nav-button w-[120px] mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 focusw-[120px] focus:bg-gray-300 focus:text-black focus:w-24 group">
+                <box-icon name="search-alt-2" class="text-xl" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme hidden group-hover:inline group-hover:ml-3 transition duration-300">Search</span>
             </div>
-            <div class="flex flex-col items-center text-gray-600 hover:text-blue-600">
-                <box-icon name='cog' type='solid'></box-icon>
-                <span class="text-sm">Settings</span>
+    
+            <div
+                class="nav-button w-[120px] mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 focusw-[120px] focus:bg-gray-100 focus:text-black focus:w-24 group">
+                <box-icon name="bell" class="text-xl" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme hidden group-hover:inline group-hover:ml-3 transition duration-300">Inbox</span>
+            </div>
+    
+            <div
+                class="nav-button w-[120px] mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 focusw-[120px] focus:bg-gray-100 focus:text-black focus:w-24 group">
+                <box-icon name="user" class="text-xl" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme hidden group-hover:inline group-hover:ml-3 transition duration-300">Profile</span>
+            </div>
+    
+            <div
+                class="nav-button w-[120px] mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 focusw-[120px] focus:bg-gray-100 focus:text-black focus:w-24 group">
+                <box-icon name="cog" class="text-xl" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme hidden group-hover:inline group-hover:ml-3 transition duration-300">Setting</span>
             </div>
         </div>
     </div>
@@ -240,6 +303,23 @@
         toggleButton.addEventListener('click', () => {
             profileCard.style.display = profileCard.style.display === 'none' || profileCard.style.display === '' ? 'block' : 'none';
             HomePage.style.display = HomePage.style.display === 'block' || HomePage.style.display === '' ? 'none' : 'block';
+        });
+
+        // Select all nav buttons
+        const navButtons = document.querySelectorAll(".nav-button");
+        navButtons.forEach(button => {
+            button.addEventListener("mouseover", () => {
+                const icon = button.querySelector("box-icon");
+                if (icon) {
+                    icon.setAttribute("color", "black");
+                }
+            });
+            button.addEventListener("mouseout", () => {
+                const icon = button.querySelector("box-icon");
+                if (icon) {
+                    icon.setAttribute("color", "black");
+                }
+            });
         });
     </script>
 </body>
