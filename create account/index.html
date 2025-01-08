@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-grow | HomePage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {
+    display: none;
+}
+.bg-theme{
+    /*background-color: rgb(255, 255, 255);*/
+    background-color: rgb(26, 66, 101);
+    
+}
+.text-theme{
+    color: black;
+}
+#class1Page{
+    /* display: none; */
+}
+</style>
+
+<body class="font-sans">
+
+
+    <!-- Dropdown Menu -->
+    <div id="menu" class="hidden fixed top-0 left-0 w-64 h-full bg-theme z-50">
+        <div class="p-5 border-b-4 border-blue-300">
+            <h2 class="text-xl font-bold text-gray-100 text-center">e-grow</h2>
+        </div>
+        <div class="p-2 space-y-4">
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme transition duration-300">Profile</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Accounts</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Settins</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme  transition duration-300">Saved</span>
+            </div>
+            <div
+                class="w-full px-4 py-2 flex items-center justify-left transition duration-300 bg-gray-300 text-black group">
+                <box-icon name="user" class="text-xl mr-2" color="black"></box-icon>
+                <span
+                    class="ml-2 text-xs text-theme transition duration-300">Sign Out</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Header Section -->
+    <div class="flex items-center justify-between px-5 py-3 bg-theme border-b-4 border-green-300">
+        <div id="menu-button" class="text-lg text-gray-100 cursor-pointer">☰</div>
+    
+        <div class="flex flex-grow mx-6">
+            <input type="text" placeholder="Search"
+                class="flex-1 border border-gray-300 rounded-lg px-4 py-2 mx-7 hover:outline-none hover:ring-2 hover:ring-green-300">
+        </div>
+        <!-- Icon to trigger profile card display -->
+        <div class="absolute top-4 right-2">
+            <div id="toggleButton" class="w-8 h-8 mx-2 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
+                <box-icon name='user' type='solid'></box-icon>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Profile Card -->
+    <div id="profileCard" class="hidden w-full bg-theme overflow-y-auto">
+        <div class="p-6 text-center">
+            <!-- Profile Photo -->
+            <img class="w-24 h-24 border-2 border-blue-300 bg-gray-100 rounded-full mx-auto mb-4" src="Logo/school_16481866.png" alt="User Profile Photo">
+    
+            <!-- User Details -->
+            <h2 class="text-gray-100 text-xl font-bold">Ankit Kumar</h2>
+            <p class="text-theme2">@ancet-coder-26-289</p>
+            <p class="text-theme2">ancet20016@gmail.com</p>
+    
+            <!-- Logout Button -->
+            <div class="max-w-60 mx-auto my-4 rounded overflow-hidden flex">
+                <button class="m-4 w-24 h-10 px-1 py-2 bg-gray-300 text-theme text-sm rounded hover:bg-gray-100">Log
+                    Out</button>
+                <button class="m-4 w-24 h-10 px-1 py-2 bg-gray-300 text-theme text-sm rounded hover:bg-gray-100">Edit
+                    Profile</button></a>
+            </div>
+        </div>
+        <!-- Tournament Achievements -->
+        <div class="border-t p-4 m-4 flex max-w-sm mx-auto bg-white rounded">
+            <h3 class="font-semibold mb-2">Tournament Achievements</h3>
+            <img class="w-[120px] h-[120px] object-cover" src="Logo/school_16481979.png" alt="Image Placeholder">
+        </div>
+        <!-- Favorite Books -->
+        <div class="max-w-sm mx-auto my-4 rounded overflow-hidden flex shadow-lg bg-theme border-2 border-gray-100">
+            <img class="w-[120px] h-[120px] object-cover bg-white" src="Logo/school_16481839.png"
+                alt="Image Placeholder">
+            <div class="px-2 py-4">
+                <h2 class="font-bold text-gray-100 text-xl">Favorite Books</h2>
+                <p class="text-gray-100 text-base">Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+        <div class="max-w-sm mx-auto my-4 rounded overflow-hidden flex shadow-lg bg-theme border-2 border-gray-100">
+            <img class="w-[120px] h-[120px] object-cover bg-white" src="Logo/diploma_16481972.png"
+                alt="Image Placeholder">
+            <div class="px-2 py-4">
+                <h2 class="font-bold text-gray-100 text-xl">Rewards</h2>
+                <p class="text-gray-100 text-base">Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Overlay-nav -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <div id="home" class="home">
+    <div id="pageContainer" class="pageContainer">
+
+        <!-- Classes -->
+        <div id="classes" class="bg-theme rounded-xl p-6 max-w-lg m-6">
+
+            <h2 class="text-center text-sm text-gray-200 font-semibold mb-4">VIEW BOOKS FOR CLASS I - XII</h2>
+            <div class="grid grid-cols-3 gap-4">
+
+                    <div id="class7" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            7</div>
+                        <p class="text-gray-300 text-sm mt-2">110 Books</p>
+                    </div>
+                
+                    <div id="class8" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            8</div>
+                        <p class="text-gray-300 text-sm mt-2">120 Books</p>
+                    </div>
+                
+                    <div id="class9" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            9</div>
+                        <p class="text-gray-300 text-sm mt-2">130 Books</p>
+                    </div>
+                
+                    <div id="class10" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            10</div>
+                        <p class="text-gray-300 text-sm mt-2">140 Books</p>
+                    </div>
+                
+                    <div id="class11" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            11</div>
+                        <p class="text-gray-300 text-sm mt-2">150 Books</p>
+                    </div>
+                
+                    <div id="class12" class="flex flex-col items-center cursor-pointer">
+                        <div class="bg-gray-800 text-yellow-300 w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold">
+                            12</div>
+                        <p class="text-gray-300 text-sm mt-2">160 Books</p>
+                    </div>
+                
+            </div>
+
+        </div>
+
+
+        <!-- <div class="flex items-center mt-4 justify-around">
+            <div
+                class="w-[200px] mr-1 py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='book-alt' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">Books</span>
+            </div>
+            <div
+                class="w-[200px] py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='file' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">PYQ</span>
+            </div>
+            <div
+                class="w-[200px] ml-1 py-2 px-5 flex items-center justify-left transition duration-300 bg-gray-300 hover:bg-gray-100 border-y-4 hover:border-green-300 text-black">
+                <box-icon name='timer' type='solid' animation='tada' color="rgb(16, 173, 115)"></box-icon>
+                <span class="text-sm ml-3 text-gray-900">Tests</span>
+            </div>
+        </div> -->
+
+    </div>
+
+    <!-- Page2 card -->
+    <div id="classPage"></div>
+    
+
+    <!-- Footer Section -->
+    <div class="fixed bottom-0 w-full bg-theme border-t-4 border-green-300">
+        <div class="flex justify-around py-3 px-3">
+            <div
+                class="nav-button mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 hover:bg-gray-900 w-24 group">
+                <box-icon name="book-alt" type="solid" class="text-xl" color="white"></box-icon>   
+            </div> 
+            <div
+                class="nav-button mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 hover:bg-gray-900 w-24 group">
+                <box-icon name="conversation" type="solid" class="text-xl" color="white"></box-icon>  
+            </div>
+            <div
+                class="nav-button mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 hover:bg-gray-900 w-24 group">
+                <box-icon name="bell" class="text-xl" color="white"></box-icon>
+            </div>
+            <div
+                class="nav-button mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 hover:bg-gray-900 w-24 group">
+                <box-icon name="user" class="text-xl" color="white"></box-icon>       
+            </div>
+            <div
+                class="nav-button mx-1 flex items-center justify-center rounded-xl p-2 transition duration-300 hover:bg-gray-900 w-24 group">
+                <box-icon name="cog" type="solid" class="text-xl" color="white"></box-icon>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
